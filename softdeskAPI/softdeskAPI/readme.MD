@@ -55,7 +55,6 @@ ___
     ``` bash
     git clone https://github.com/Mickael-Salmon/OCP10.git
     cd OCP10
-
     ```
 
 2.  **Installation de Poetry :**

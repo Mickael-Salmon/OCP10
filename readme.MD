@@ -53,9 +53,8 @@ ___
 1.  **Clonage du dépôt :**
 
     ``` bash
-    git clone <URL_DU_REPO>
-    cd <NOM_DU_REPO>
-
+    git clone https://github.com/Mickael-Salmon/OCP10.git
+    cd OCP10
     ```
 
 2.  **Installation de Poetry :**
@@ -78,6 +77,7 @@ ___
     Utilisez Poetry pour installer les dépendances du projet.
 
     ``` bash
+    cd softdeskAPI
     poetry install
 
     ```
@@ -101,6 +101,7 @@ ___
 5.  **Effectuez les migrations initiales :**
 
     ``` bash
+    cd softdeskAPI
     python manage.py migrate
 
     ```
@@ -108,6 +109,7 @@ ___
 6.  **Lancez le serveur de développement :**
 
     ``` bash
+    cd softdeskAPI
     python manage.py runserver
 
     ```
