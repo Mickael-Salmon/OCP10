@@ -88,7 +88,6 @@ class ContributorTest(TestCase):
 class IssueTest(TestCase):
 
     def setUp(self):
-        # ... [Préparation similaire à la précédente]
         self.project = Project.objects.create(**self.project_data, author=self.user)
         self.issue_data = {
             "title": "Test Issue",
@@ -98,12 +97,10 @@ class IssueTest(TestCase):
             "priority": "LOW"
         }
 
-    # ... [Des tests similaires à ceux de la classe ProjectTest]
 
 class CommentTest(TestCase):
 
     def setUp(self):
-        # ... [Préparation similaire à la précédente]
         self.project = Project.objects.create(**self.project_data, author=self.user)
         self.issue = Issue.objects.create(project=self.project, **self.issue_data)
         self.comment_data = {
@@ -174,7 +171,6 @@ class ContributorAuthorizationTest(TestCase):
 class IssueAuthorizationTest(TestCase):
 
     def setUp(self):
-        # ... [Préparation similaire à la précédente]
         self.issue_data = {
             "title": "Test Issue",
             "description": "Description for test issue",
@@ -207,7 +203,6 @@ class IssueAuthorizationTest(TestCase):
 class CommentAuthorizationTest(TestCase):
 
     def setUp(self):
-        # ... [Préparation similaire à la précédente]
         self.issue = Issue.objects.create(project=self.project, **self.issue_data)
         self.comment_data = {
             "description": "Test comment"
