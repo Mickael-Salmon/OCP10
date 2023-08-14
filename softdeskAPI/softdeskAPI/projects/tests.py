@@ -2,6 +2,10 @@ from django.test import TestCase
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
 from projects.models import Project
+from projects.models import Contributor
+from projects.models import Issue
+from projects.models import Comment
+
 
 class AuthenticationTest(TestCase):
 
