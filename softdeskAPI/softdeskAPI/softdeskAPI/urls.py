@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-#from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path, include
 from rest_framework.urlpatterns import format_suffix_patterns
 from projects import views
@@ -24,17 +24,8 @@ from projects import views
 # ]
 
 urlpatterns = [
-    path('', include('users.urls')),
-    path('projects/', include('projects.urls')),
-    path('projects/', views.ProjectList.as_view()),
-    path('projects/<int:pk>/', views.ProjectDetail.as_view()),
-    path('projects/<int:pk>/contributors/', views.ContributorList.as_view()),
-    path('projects/<int:pk>/contributors/<int:contributor_pk>/', views.ContributorDetail.as_view()),
-    path('projects/<int:pk>/issues/', views.IssueList.as_view()),
-    path('projects/<int:pk>/issues/<int:issue_pk>/', views.IssueDetail.as_view()),
-    path('projects/<int:pk>/issues/<int:issue_pk>/comments/', views.CommentList.as_view()),
-    path('projects/<int:pk>/issues/<int:issue_pk>/comments/<int:comment_pk>/', views.CommentDetail.as_view()),
+    path("", include("users.urls")),
+    path("projects/", include("projects.urls")),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
-

@@ -39,6 +39,35 @@ ___
 
 ___
 
+## 📚 Rappel des tâches pour le Projet API SoftDesk
+
+## Todo List pour le Projet SoftDesk
+
+### OWASP et Sécurité
+- [x] Authentification via JWT.
+- [x] Autorisation et accès contrôlé pour les utilisateurs et contributeurs.
+- [x] Gestion des dépendances avec Poetry pour minimiser les vulnérabilités.
+
+### Green Code
+- [x] Pagination des ressources pour réduire la charge serveur.
+- [x] Optimisation des requêtes web.
+- [x] Revue et optimisation du code source.
+- [x] Gestion intelligente de l'hébergeur et des ressources.
+
+### Exigences du Projet
+- [x] Modèle `User` avec gestion du consentement.
+- [x] Modèle `Contributor` pour lier utilisateurs et projets.
+- [x] Modèle `Project` pour la gestion des projets.
+- [x] Modèle `Issue` pour gérer les problèmes des projets.
+- [x] Modèle `Comment` pour les commentaires sur les issues.
+- [x] Implémentation de la confidentialité et des choix des utilisateurs.
+- [x] Vérification de l'âge des utilisateurs lors de l'inscription.
+- [x] Horodatage pour toutes les ressources.
+- [x] Mise en place des permissions et des rôles d'accès.
+- [x] Test des points de terminaison d'API avec Postman ou `curl`.
+
+
+
 ## 🖥️ Comment commencer ?
 
 ## 🛠️ Instructions d'installation
@@ -116,19 +145,3 @@ ___
 
 
 Le serveur devrait démarrer, et l'API devrait être accessible à `http://localhost:8000/`.
-
-___
-
-## 📞 Contact
-
-
-___
-
-## 📜 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus d'informations.
-
-___
-
-💡 N'oubliez pas de jeter un œil à nos autres projets chez **SoftDesk**. Bon codage ! 🎉
-
