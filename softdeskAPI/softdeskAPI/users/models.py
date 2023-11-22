@@ -3,14 +3,10 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import User
 from django.conf import settings
 
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     date_of_birth = models.DateField(null=True, blank=True)
-
-#     def __str__(self):
-#         return self.user.username
-
 class UserData(models.Model):
+    """
+    Model representing user data.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth = models.DateField()
 

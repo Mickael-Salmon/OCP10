@@ -59,7 +59,7 @@ class ExportDataView(APIView):
                 "email": user.email,
                 "first_name": user.first_name,
                 "last_name": user.last_name,
-                "date_of_birth": user.date_of_birth,
+                # "date_of_birth": user.date_of_birth,
                 # ... Add any other fields to export here ...
             }
 
