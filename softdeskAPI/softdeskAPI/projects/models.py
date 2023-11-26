@@ -62,17 +62,25 @@ class Project(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        """
-        Returns a string representation of the project object.
+            """
+            Returns a string representation of the project object.
 
-        The string contains the title, description, type, author, contributors, tags, priority, status, created_at, and updated_at attributes of the project.
-        """
-        return f"{self.title} - {self.description} - {self.type} - {self.author} - {self.contributors} - {self.tags} - {self.priority} - {self.status} - {self.created_at} - {self.updated_at}"
+            The string contains the title, description, type, author, contributors, tags, priority, status, created_at, and updated_at attributes of the project.
+
+            Returns:
+                str: A string representation of the project object.
+            """
+            return f"{self.title} - {self.description} - {self.type} - {self.author} - {self.contributors} - {self.tags} - {self.priority} - {self.status} - {self.created_at} - {self.updated_at}"
 
 
 class Contributor(models.Model):
     """
     Represents a contributor to a project.
+
+    Attributes:
+        user (ForeignKey): The user associated with the contributor.
+        project (ForeignKey): The project associated with the contributor.
+        role (CharField): The role of the contributor in the project.
     """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -80,6 +88,9 @@ class Contributor(models.Model):
         Project, on_delete=models.CASCADE, related_name="contributor_set"
     )
     role = models.CharField(max_length=11, choices=ROLES, default="CONTRIBUTOR")
+    #Empêcher la création de doublons de contributors pour un même projet - Un contributor ne devrait pas être présent plus d'une fois dans un projet
+    class Meta:
+        unique_together = ('user', 'project')
 
 
 class Issue(models.Model):

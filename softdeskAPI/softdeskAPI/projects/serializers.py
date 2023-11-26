@@ -45,7 +45,7 @@ class CommentSerializer(serializers.ModelSerializer):
         Meta class for Comment serializer.
         """
         model = Comment
-        fields = ["id", "issue", "description", "author", "created_time"]
+        fields = ["id", "issue", "desc", "author", "created_time"]
         read_only_fields = ["id", "author", "created_time", "issue"]
 
 
@@ -79,13 +79,17 @@ class IssueSerializer(serializers.ModelSerializer):
 
     Serializes the Issue model fields into JSON format.
     """
-
+    assignee = serializers.PrimaryKeyRelatedField(
+        queryset=Contributor.objects.all(),
+        allow_null=True,
+        required=False
+    )
     class Meta:
         model = Issue
         fields = [
             "id",
             "title",
-            "description",
+            "desc",
             "tag",
             "priority",
             "status",
