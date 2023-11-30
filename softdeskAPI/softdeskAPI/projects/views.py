@@ -72,34 +72,7 @@ class ProjectDetail(generics.RetrieveUpdateDestroyAPIView):
 
     serializer_class = ProjectSerializer
     permission_classes = [ProjectPermissions]
-    # lookup_field = 'project_pk'
 
-    # def get_queryset(self):
-    #     """
-    #     Return a queryset that includes only the projects where the current user is a contributor.
-
-    #     Returns:
-    #         QuerySet: The queryset of projects where the current user is a contributor.
-    #     """
-    #     # Fixed error : django.core.exceptions.FieldError: Unsupported lookup 'user' for ForeignKey or join on the field not permitted.
-    #     # return Project.objects.filter(contributors__user=self.request.user)
-    #     # return Project.objects.filter(contributors=self.request.user)
-    #     # return Project.objects.filter(id=self.kwargs['pk'], contributors=self.request.user)
-    #     user = self.request.user
-    #     return Project.objects.filter(
-    #         Q(author=user) |
-    #         Q(contributors=user)
-    #     )
-    # def get_queryset(self):
-    #     """
-    #     Return a queryset that includes only the project specified in the URL if the current user is a contributor or the author.
-    #     """
-    #     user = self.request.user
-    #     project_pk = self.kwargs.get('pk')
-    #     return Project.objects.filter(
-    #         Q(id=project_pk) &
-    #         (Q(author=user) | Q(contributors=user))
-    #     )
     def get_queryset(self):
         # Récupère l'ID du projet à partir de l'URL
         # project_id = self.kwargs.get('project_pk')
@@ -151,15 +124,6 @@ class ContributorDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     serializer_class = ContributorSerializer
     permission_classes = [ContributorPermissions]
-
-    # def get_queryset(self):
-    #     """
-    #     Return a queryset that includes only the contributors of the specific project.
-
-    #     Returns:
-    #         QuerySet: A queryset containing the contributors of the specific project.
-    #     """
-    #     return Contributor.objects.filter(project__id=self.kwargs["pk"])
 
     def get_object(self):
         # Utilise 'user_pk' et 'project_pk' pour obtenir l'objet Contributor spécifique
@@ -233,22 +197,6 @@ class IssueDetail(generics.RetrieveUpdateDestroyAPIView):
 
         super().perform_update(serializer)
 
-# class CommentList(generics.ListCreateAPIView):
-#     """
-#     API endpoint to list all comments of an issue or add a new comment to an issue.
-#     """
-
-#     serializer_class = CommentSerializer
-#     permission_classes = [CommentPermissions]
-
-#     def get_queryset(self):
-#             """
-#             Return a queryset that includes only the comments of the specific issue.
-
-#             Returns:
-#                 QuerySet: A queryset containing the comments of the specific issue.
-#             """
-#             return Comment.objects.filter(issue__id=self.kwargs["issue_pk"])
 class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
     permission_classes = [CommentPermissions]

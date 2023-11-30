@@ -2,47 +2,6 @@
 from rest_framework.generics import get_object_or_404
 from projects.models import Project, Issue, Comment
 
-
-# class ProjectPermissions(permissions.BasePermission):
-#     """
-#     Custom permissions for accessing and modifying projects.
-
-#     - For safe methods (e.g., GET), the user must be a contributor of the project.
-#     - For other methods (e.g., POST, PUT, DELETE), the user must be the author of the project.
-#     """
-
-#     def has_permission(self, request, view):
-#         """
-#         Check if the user has permission to perform the requested action on the project.
-
-#         Args:
-#             request (HttpRequest): The request object.
-#             view (View): The view object.
-
-#         Returns:
-#             bool: True if the user has permission, False otherwise.
-#         """
-#         project_pk = view.kwargs.get("pk")
-#         if project_pk is None:
-#             return False  # Prevent access if project_pk is not provided
-
-#         try:
-#             project = Project.objects.get(id=project_pk)
-#         except Project.DoesNotExist:
-#             return False
-
-#         try:
-#             # project = get_object_or_404(Project, id=view.kwargs["project_pk"])
-#             # project = get_object_or_404(Project, id=view.kwargs["pk"])
-#             project = Project.objects.get(id=project_pk)
-#             if request.method in permissions.SAFE_METHODS:
-#                 return project in Project.objects.filter(
-#                     contributors__user=request.user
-#                 )
-#             return request.user == project.author
-#         except KeyError:
-#             return True
-
 class ProjectPermissions(permissions.BasePermission):
     def has_permission(self, request, view):
         project_pk = view.kwargs.get("pk")
@@ -65,22 +24,6 @@ class ContributorPermissions(permissions.BasePermission):
     - For safe methods (e.g., GET), the user must be a contributor of the project.
     - For other methods, the user must be the author of the project.
     """
-
-    # def has_permission(self, request, view):
-    #     """
-    #     Check if the user has permission to perform the requested action on the project.
-
-    #     Args:
-    #         request (HttpRequest): The request object.
-    #         view (APIView): The view object.
-
-    #     Returns:
-    #         bool: True if the user has permission, False otherwise.
-    #     """
-    #     project = get_object_or_404(Project, id=view.kwargs["pk"])
-    #     if request.method in permissions.SAFE_METHODS:
-    #         return project in Project.objects.filter(contributors=request.user)
-    #     return request.user == project.author
     def has_permission(self, request, view):
         project_pk = view.kwargs.get("project_pk") or view.kwargs.get("pk")
         user_pk = view.kwargs.get("user_pk")
@@ -140,42 +83,6 @@ class CommentPermissions(permissions.BasePermission):
     - Otherwise, the user must be a contributor of the project.
     """
 
-    # def has_permission(self, request, view):
-    #     """
-    #     Check if the user has permission to perform the requested action.
-
-    #     Args:
-    #         request (HttpRequest): The request object.
-    #         view (APIView): The view object.
-
-    #     Returns:
-    #         bool: True if the user has permission, False otherwise.
-    #     """
-    #     project = get_object_or_404(Project, id=view.kwargs["pk"])
-
-    #     try:
-    #         comment = get_object_or_404(Comment, id=view.kwargs["comment_pk"])
-    #         if request.method in permissions.SAFE_METHODS:
-    #             return project in Project.objects.filter(
-    #                 contributors__user=request.user
-    #             )
-    #         return request.user == comment.author
-    #     except KeyError:
-    #         return project in Project.objects.filter(contributors__user=request.user)
-    # def has_permission(self, request, view):
-    #     # Gérer la requête POST différemment car il n'y a pas d'ID de commentaire
-    #     if request.method == 'POST':
-    #         project_pk = view.kwargs.get("project_pk")
-    #         project = get_object_or_404(Project, id=project_pk)
-    #         return project.contributors.filter(id=request.user.id).exists() or project.author == request.user
-
-    #     # Logique pour les autres méthodes (GET, PUT, DELETE)
-    #     comment_pk = view.kwargs.get("comment_pk")
-    #     if comment_pk:
-    #         comment = get_object_or_404(Comment, id=comment_pk)
-    #         return request.user == comment.author or request.user == comment.issue.project.author
-
-    #     return False
     def has_permission(self, request, view):
         project_pk = view.kwargs.get('project_pk')
         issue_pk = view.kwargs.get('issue_pk')

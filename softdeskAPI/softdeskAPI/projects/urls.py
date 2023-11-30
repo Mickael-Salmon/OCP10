@@ -2,23 +2,6 @@
 from rest_framework.urlpatterns import format_suffix_patterns
 from projects import views
 
-# urlpatterns = [
-#     path('', views.ProjectList.as_view()),
-#     path('<int:pk>/', views.ProjectDetail.as_view()),
-#     path('<int:pk>/contributors/', views.ContributorList.as_view()),
-#     path('<int:pk>/contributors/<int:contributor_pk>/', views.ContributorDetail.as_view()),
-#     path('<int:pk>/issues/', views.IssueList.as_view()),
-#     path('<int:pk>/issues/<int:issue_pk>/', views.IssueDetail.as_view()),
-#     path('<int:pk>/issues/<int:issue_pk>/comments/', views.CommentList.as_view()),
-#     path('<int:pk>/', views.ProjectDetail.as_view()),
-#     path('<int:pk>/contributors/', views.ContributorList.as_view()),
-#     path('<int:pk>/contributors/<int:contributor_pk>/', views.ContributorDetail.as_view()),
-#     path('<int:pk>/issues/', views.IssueList.as_view()),
-#     path('<int:pk>/issues/<int:issue_pk>/', views.IssueDetail.as_view()),
-#     path('<int:pk>/issues/<int:issue_pk>/comments/', views.CommentList.as_view()),
-#     path('<int:pk>/users/', views.ContributorList.as_view(), name='project-contributors'),
-#     path('<int:project_pk>/users/<int:user_pk>/', views.ContributorDetail.as_view(), name='project-contributor-detail'),
-# ]
 urlpatterns = [
     path('', views.ProjectList.as_view()),
     path('<int:pk>/', views.ProjectDetail.as_view()),
