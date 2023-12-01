@@ -37,6 +37,7 @@ class ProjectList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
+        return Project.objects.all().order_by('id')
         """
         Returns:
             QuerySet: A queryset containing projects where the current user is either a contributor or the author.
@@ -105,7 +106,7 @@ class ContributorList(generics.ListCreateAPIView):
         Returns:
             QuerySet: A queryset containing the contributors of the specific project.
         """
-        return Contributor.objects.filter(project__id=self.kwargs["project_pk"])
+        return Contributor.objects.filter(project__id=self.kwargs["project_pk"]).order_by('id')
 
     def perform_create(self, serializer):
         serializer.save(project_id=self.kwargs['project_pk'])
@@ -173,7 +174,7 @@ class IssueList(generics.ListCreateAPIView):
         Returns:
             QuerySet: A queryset containing the issues of the specific project.
         """
-        return Issue.objects.filter(project__id=self.kwargs["project_pk"])
+        return Issue.objects.filter(project__id=self.kwargs["project_pk"]).order_by('id')
 
     def perform_create(self, serializer):
         project = get_object_or_404(Project, id=self.kwargs['project_pk'])
@@ -198,7 +199,7 @@ class IssueDetail(generics.RetrieveUpdateDestroyAPIView):
         # Utilise 'project_pk' et 'issue_pk' pour obtenir l'objet Issue spécifique
         project_pk = self.kwargs.get('project_pk')
         issue_pk = self.kwargs.get('issue_pk')
-        return get_object_or_404(Issue, project__id=project_pk, id=issue_pk)
+        return get_object_or_404(Issue, project__id=project_pk, id=issue_pk).order_by('id')
 
     def update(self, request, *args, **kwargs):
         issue = self.get_object()
@@ -215,7 +216,7 @@ class CommentList(generics.ListCreateAPIView):
     def get_queryset(self):
         issue_pk = self.kwargs.get("issue_pk")
         project_pk = self.kwargs.get("project_pk")
-        return Comment.objects.filter(issue__id=issue_pk, issue__project__id=project_pk)
+        return Comment.objects.filter(issue__id=issue_pk, issue__project__id=project_pk).order_by('id')
 
     def perform_create(self, serializer):
         issue_pk = self.kwargs.get("issue_pk")
@@ -245,7 +246,7 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
         Returns:
             QuerySet: A queryset containing comments related to the specific issue.
         """
-        return Comment.objects.filter(issue__id=self.kwargs["issue_pk"])
+        return Comment.objects.filter(issue__id=self.kwargs["issue_pk"]).order_by('id')
 
     def get_object(self):
         comment_id = self.kwargs.get('comment_pk')
