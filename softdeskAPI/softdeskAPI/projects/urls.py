@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:project_pk>/issues/<int:issue_pk>/', views.IssueDetail.as_view()),
     path('<int:project_pk>/issues/<int:issue_pk>/comments/', views.CommentList.as_view()),
     path('<int:project_pk>/issues/<int:issue_pk>/comments/<int:comment_pk>/', views.CommentDetail.as_view()),
+    path('<int:project_pk>/users/<int:user_pk>/', views.ContributorDetail.as_view(), name='project-contributor-detail'),
 ]
 
 
