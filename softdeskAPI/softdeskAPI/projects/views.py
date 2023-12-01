@@ -181,21 +181,32 @@ class IssueList(generics.ListCreateAPIView):
 
 
 class IssueDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint to retrieve, update, or delete a specific issue of a specific project.
+
+    Attributes:
+        serializer_class (IssueSerializer): The serializer class for the issue model.
+        permission_classes (list): The list of permission classes for the view.
+
+    Methods:
+        get_object(): Return the specific issue of the specific project.
+    """
     serializer_class = IssueSerializer
     permission_classes = [IssuePermissions]
 
-    def get_queryset(self):
-        return Issue.objects.filter(project__id=self.kwargs["pk"])
+    def get_object(self):
+        # Utilise 'project_pk' et 'issue_pk' pour obtenir l'objet Issue spécifique
+        project_pk = self.kwargs.get('project_pk')
+        issue_pk = self.kwargs.get('issue_pk')
+        return get_object_or_404(Issue, project__id=project_pk, id=issue_pk)
 
-    def perform_update(self, serializer):
+    def update(self, request, *args, **kwargs):
         issue = self.get_object()
-        project = issue.project
-
-        assignee_id = serializer.validated_data.get('assignee')
-        if assignee_id and not project.contributors.filter(id=assignee_id.id).exists():
-            raise serializers.ValidationError("This user is not contributing to this project.")
-
-        super().perform_update(serializer)
+        serializer = self.get_serializer(issue, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CommentList(generics.ListCreateAPIView):
     serializer_class = CommentSerializer
